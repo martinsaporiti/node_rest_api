@@ -22,12 +22,29 @@ The project structure is:
     |- config.js # Contains global configurations: MongoDB, PORTS and Secret.
 |- middlewares
     |- authentication.js # Define a mdw for authetication and authorization.
-|- model # Contains the model off app.
+|- model # Contains the model of app.
 |- routes # Contains the routes for each entity. The api rest it's define here.
 
 server.js # (file) Makes global configurations and startup the server.
 
 ```
+
+## Installation
+Very easy, just run:
+
+```bash
+npm install
+```
+
+## Run!
+```bash
+nodemon server/server.js
+# or ...
+node server/server.js
+```
+
+
+## Some Notes...
 
 When the server starts at first time, a default user is created:
 
@@ -98,7 +115,8 @@ curl --location --request GET 'localhost:3000/user' \
 * PUT /product/id - Updates a product.
 * DELETE /product/id - Deletes a product.
 
-
+<br>
+---
 
 ## Running with Docker.
 
