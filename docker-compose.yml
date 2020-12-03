@@ -1,0 +1,53 @@
+version: '3.1'
+
+services:
+  mongo:
+      image: mongo:3.6.4
+      command: --smallfiles
+      container_name: products_db
+      ports:
+        - "27017:27017"
+      # networks:
+      #   - products-network
+      volumes:
+        - ./products/db:/data/db
+        - mongo_products_db_config:/data/configdb
+      restart: always
+
+      # environment:
+      #   - MONGO_INITDB_ROOT_USERNAME=admin
+      #   - MONGO_INITDB_ROOT_PASSWORD=admin
+        
+  backend:
+    build:
+      context: .
+    container_name: products_api_rest
+    ports:
+      - "3000:3000"
+
+    # networks:
+    #   - products-network
+
+    environment:  
+      - MONGO_DB_STR_CONNECTION=mongodb://mongo:27017/products
+      - PORT=3000
+
+    depends_on:
+      mongo:
+        condition: service_started
+      
+      
+# networks:
+#  products-network:
+#     driver: bridge
+
+volumes:
+  mongo_products_db_config:
+    name: mongo_products_db_config
+
+
+
+
+
+
+
